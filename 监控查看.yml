@@ -1,0 +1,567 @@
+app:
+  description: ''
+  icon: 🤖
+  icon_background: '#FFEAD5'
+  mode: advanced-chat
+  name: 监控查看
+  use_icon_as_answer_icon: false
+dependencies:
+- current_identifier: null
+  type: marketplace
+  value:
+    marketplace_plugin_unique_identifier: langgenius/tongyi:0.0.37@9e635dd61046ede51c76c174a0c7dc723616cd6698b18c0273c0ee11aeb9accd
+- current_identifier: null
+  type: marketplace
+  value:
+    marketplace_plugin_unique_identifier: langgenius/gemini:0.3.0@3d5be07581c53609a49d2bbb47be98c2e10820591bfc99f686b005d2c1ef95d9
+kind: app
+version: 0.3.1
+workflow:
+  conversation_variables: []
+  environment_variables: []
+  features:
+    file_upload:
+      allowed_file_extensions:
+      - .JPG
+      - .JPEG
+      - .PNG
+      - .GIF
+      - .WEBP
+      - .SVG
+      allowed_file_types:
+      - image
+      allowed_file_upload_methods:
+      - remote_url
+      - local_file
+      enabled: true
+      fileUploadConfig:
+        audio_file_size_limit: 50
+        batch_count_limit: 5
+        file_size_limit: 15
+        image_file_size_limit: 10
+        video_file_size_limit: 100
+        workflow_file_upload_limit: 10
+      image:
+        enabled: false
+        number_limits: 3
+        transfer_methods:
+        - local_file
+        - remote_url
+      number_limits: 3
+    opening_statement: ''
+    retriever_resource:
+      enabled: true
+    sensitive_word_avoidance:
+      enabled: false
+    speech_to_text:
+      enabled: false
+    suggested_questions: []
+    suggested_questions_after_answer:
+      enabled: false
+    text_to_speech:
+      enabled: false
+      language: ''
+      voice: ''
+  graph:
+    edges:
+    - data:
+        isInLoop: false
+        sourceType: start
+        targetType: question-classifier
+      id: 1754642366358-source-1754963107013-target
+      source: '1754642366358'
+      sourceHandle: source
+      target: '1754963107013'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: question-classifier
+        targetType: llm
+      id: 1754963107013-1-1754965796149-target
+      source: '1754963107013'
+      sourceHandle: '1'
+      target: '1754965796149'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: question-classifier
+        targetType: llm
+      id: 1754963107013-2-1754985366429-target
+      source: '1754963107013'
+      sourceHandle: '2'
+      target: '1754985366429'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInLoop: false
+        sourceType: llm
+        targetType: http-request
+      id: 1754985366429-source-1754963526060-target
+      source: '1754985366429'
+      sourceHandle: source
+      target: '1754963526060'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: http-request
+        targetType: llm
+      id: 1754963526060-source-1754989701924-target
+      source: '1754963526060'
+      sourceHandle: source
+      target: '1754989701924'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInLoop: false
+        sourceType: llm
+        targetType: answer
+      id: 1754989701924-source-1754644788955-target
+      source: '1754989701924'
+      sourceHandle: source
+      target: '1754644788955'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: answer
+        targetType: answer
+      id: 1754644788955-source-1754990028597-target
+      source: '1754644788955'
+      sourceHandle: source
+      target: '1754990028597'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInLoop: false
+        sourceType: llm
+        targetType: answer
+      id: 1754965796149-source-1754644788955-target
+      source: '1754965796149'
+      sourceHandle: source
+      target: '1754644788955'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: question-classifier
+        targetType: answer
+      id: 1754963107013-1754990829124-1754990874629-target
+      source: '1754963107013'
+      sourceHandle: '1754990829124'
+      target: '1754990874629'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInLoop: false
+        sourceType: answer
+        targetType: answer
+      id: 1754990874629-source-1754644788955-target
+      source: '1754990874629'
+      sourceHandle: source
+      target: '1754644788955'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInLoop: false
+        sourceType: question-classifier
+        targetType: llm
+      id: 1754963107013-1755049278927-1754985366429-target
+      source: '1754963107013'
+      sourceHandle: '1755049278927'
+      target: '1754985366429'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    nodes:
+    - data:
+        desc: ''
+        selected: false
+        title: 开始
+        type: start
+        variables: []
+      height: 54
+      id: '1754642366358'
+      position:
+        x: 30
+        y: 324
+      positionAbsolute:
+        x: 30
+        y: 324
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        answer: '{{#1754963526060.files#}}{{#1754965796149.text#}}/'
+        desc: 图片+直接回答
+        selected: false
+        title: 直接回复
+        type: answer
+        variables: []
+      height: 152
+      id: '1754644788955'
+      position:
+        x: 1524.2857142857144
+        y: 472.57142857142856
+      positionAbsolute:
+        x: 1524.2857142857144
+        y: 472.57142857142856
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        classes:
+        - id: '1'
+          name: 普通ai对话
+        - id: '2'
+          name: 滇池摄像头问题回答
+        - id: '1754990829124'
+          name: 有几个摄像头
+        - id: '1755049278927'
+          name: 大泊口水下，客厅
+        desc: ''
+        instructions: ''
+        model:
+          completion_params:
+            temperature: 0.7
+          mode: chat
+          name: qwen-vl-plus
+          provider: langgenius/tongyi/tongyi
+        query_variable_selector:
+        - '1754642366358'
+        - sys.query
+        selected: false
+        title: 问题分类器
+        topics: []
+        type: question-classifier
+        vision:
+          configs:
+            detail: high
+            variable_selector:
+            - sys
+            - files
+          enabled: true
+      height: 248
+      id: '1754963107013'
+      position:
+        x: 334
+        y: 324
+      positionAbsolute:
+        x: 334
+        y: 324
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        authorization:
+          config: null
+          type: no-auth
+        body:
+          data: []
+          type: none
+        desc: API更改为FastAPI的地址（自己搭建）
+        headers: ''
+        method: get
+        params: name:{{#1754985366429.text#}}
+        retry_config:
+          max_retries: 3
+          retry_enabled: true
+          retry_interval: 100
+        selected: false
+        ssl_verify: false
+        timeout:
+          max_connect_timeout: 0
+          max_read_timeout: 0
+          max_write_timeout: 0
+        title: HTTP 请求
+        type: http-request
+        url: http://nas.yuningsmart.cn:55977/get_frame_by_name
+        variables: []
+      height: 168
+      id: '1754963526060'
+      position:
+        x: 942
+        y: 324
+      positionAbsolute:
+        x: 942
+        y: 324
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        context:
+          enabled: true
+          variable_selector:
+          - sys
+          - query
+        desc: ''
+        model:
+          completion_params: {}
+          mode: chat
+          name: gemini-2.5-flash-lite
+          provider: langgenius/gemini/google
+        prompt_template:
+        - id: bc6ff11f-712b-45e1-8ce2-eecbf027eb2b
+          role: system
+          text: '{{#sys.query#}}'
+        - id: 0f842b4d-e8ac-42b6-ac2a-4a8d900daefe
+          role: user
+          text: "```xml\n<instruction>\n你是一个智能助手，负责根据用户的输入提供准确、清晰、有条理的回答或帮助。你需要仔细理解用户的问题或请求，并按照以下步骤进行处理：\n\
+            \n1. **理解输入内容**：首先，全面理解用户输入的内容，识别其中的关键信息，包括问题类型、意图、语气等。\n\n2. **组织回答结构**：根据问题的性质，组织一个清晰的回答结构。例如，如果是事实性问题，提供准确的答案；如果是建议类问题，给出分点建议；如果是对话类问题，则以自然、友好的方式进行回应。\n\
+            \n3. **使用自然语言表达**：确保输出语言通顺、自然，避免使用生硬的机器翻译式表达。同时，保持专业性与亲和力之间的平衡。\n\n4.\
+            \ **遵循内容规范**：不使用任何XML标签、Markdown格式或其他结构化标记在输出中。输出应为纯文本形式。\n\n5. **检查是否符合伦理与安全标准**：确保回答内容积极正面，不包含违法、违规或不道德的内容。\n\
+            \n6. **提供扩展帮助（可选）**：在回答结束时，可以自然地询问用户是否需要进一步的帮助，以增强交互体验。\n\n请严格按照上述指导原则进行回应，确保每次输出都具备高质量、一致性与实用性。\n\
+            当应该询问有几个摄像头时回答。\n\n可用的摄像头名称仅限于以下选项：\n- 大泊口水下\n- 客厅\n\n</instruction>\n\
+            \n<examples>\n<example>\n<user_input>今天天气怎么样？</user_input>\n<assistant_output>今天北京地区的天气晴朗，气温在18到25摄氏度之间，适合外出活动。您所在的城市是哪里呢？我可以为您提供更精确的天气信息。</assistant_output>\n\
+            </example>\n\n<example>\n<user_input>如何提高英语听力水平？</user_input>\n<assistant_output>要提高英语听力水平，可以尝试以下方法：\n\
+            1. 每天坚持听英语新闻或播客；\n2. 使用带有字幕的英语影视材料进行精听训练；\n3. 练习听写，提升对语音和语调的敏感度；\n4. 参加英语听力课程或使用听力训练App；\n\
+            5. 与母语者进行实际交流，增强语感。\n坚持练习是关键，希望这些建议对您有帮助。</assistant_output>\n</example>\n\
+            \n<example>\n<user_input>帮我写一封请假邮件。</user_input>\n<assistant_output>当然可以。以下是一封请假邮件的示例：\n\
+            \n主题：请假申请\n\n尊敬的领导：\n\n您好！由于我近日身体不适，需前往医院进行检查和治疗，特此申请于2025年4月6日至4月8日请假三天。我会在请假前完成相关工作的交接，确保不影响团队进度。\n\
+            \n感谢您的理解与批准！\n\n此致  \n敬礼  \n张三  \n2025年4月5日\n\n如果您有具体的时间、事由或其他要求，也可以告诉我，我将为您调整内容。</assistant_output>\n\
+            </example>\n</examples>\n```"
+        retry_config:
+          max_retries: 3
+          retry_enabled: false
+          retry_interval: 1000
+        selected: false
+        structured_output_enabled: false
+        title: LLM
+        type: llm
+        variables: []
+        vision:
+          configs:
+            detail: high
+            variable_selector:
+            - sys
+            - files
+          enabled: true
+      height: 90
+      id: '1754965796149'
+      position:
+        x: 942
+        y: 472.57142857142856
+      positionAbsolute:
+        x: 942
+        y: 472.57142857142856
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        context:
+          enabled: true
+          variable_selector:
+          - sys
+          - query
+        desc: 判断摄像头名字
+        model:
+          completion_params:
+            include_thoughts: false
+            thinking_mode: false
+          mode: chat
+          name: gemini-2.5-flash-lite
+          provider: langgenius/gemini/google
+        prompt_template:
+        - id: b713d967-6aeb-4955-b814-cd0d8782dde5
+          role: system
+          text: '
+
+            {{#sys.query#}}'
+        - id: dfc6a4db-769b-44df-a17c-d5154e09df6d
+          role: user
+          text: '你是一个精确的摄像头名称提取助手。你的唯一任务是从用户输入中识别并提取出摄像头名称。
+
+
+            可用的摄像头名称仅限于以下选项：
+
+            - 大泊口水下
+
+            - 客厅
+
+
+            规则：
+
+            1. 你必须且只能输出上述列表中的一个摄像头名称
+
+            2. 不要输出任何额外的文字、标点或解释
+
+            3. 如果用户提到的内容与多个摄像头相关，只输出最相关的一个
+
+            4. 如果用户输入中没有提到任何摄像头，或无法确定用户想查看哪个摄像头，默认输出"客厅"
+
+
+            示例：
+
+            用户输入：我想看看大泊口水下摄像头的情况
+
+            输出：大泊口水下
+
+
+            用户输入：客厅现在怎么样
+
+            输出：客厅'
+        selected: false
+        title: 判断摄像头名字
+        type: llm
+        variables: []
+        vision:
+          enabled: false
+      height: 118
+      id: '1754985366429'
+      position:
+        x: 638
+        y: 324
+      positionAbsolute:
+        x: 638
+        y: 324
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        context:
+          enabled: false
+          variable_selector: []
+        desc: ''
+        memory:
+          query_prompt_template: '{{#sys.query#}}
+
+
+            {{#sys.files#}}'
+          role_prefix:
+            assistant: ''
+            user: ''
+          window:
+            enabled: false
+            size: 50
+        model:
+          completion_params:
+            temperature: 0.7
+            thinking_mode: false
+          mode: chat
+          name: gemini-2.5-flash
+          provider: langgenius/gemini/google
+        prompt_template:
+        - id: 9662c83e-e332-428e-bfc5-b4788b43c241
+          role: system
+          text: "```xml\n<instruction>\n你将扮演一个先进的智能安防监控系统分析员。你的任务是根据提供的监控画面（以图片或文字描述的形式给出），生成一段简洁、客观、信息准确的中文描述。这段描述应该清晰地反映出监控画面的核心内容，特别是与环境状态（如水体、天气）和人员活动相关的关键信息。\n\
+            </instruction>\n\n<角色设定>\n作为一个专业的监控分析系统，你的语言风格应保持客观、中立和专业。避免使用主观臆测、情感色彩或不确定的词语（例如“可能”、“好像”）。你的目标是提供事实性的报告，帮助监控人员快速掌握现场情况。\n\
+            </角色设定>\n\n<分析要点>\n在分析监控画面时，请重点关注并描述以下几个方面的信息：\n\n1.  **人员信息**:\n    *\
+            \   画面中是否有人？\n    *   如果有，请描述人数、大致位置、穿着特征（如果清晰可辨）、以及正在进行的活动（例如：行走、奔跑、站立、聚集、工作、游泳等）。\n\
+            \    *   评估是否存在异常或潜在风险的行为。\n\n2.  **环境状态**:\n    *   **水体情况**: 如果画面中有水体（如河流、湖泊、池塘、泳池），请重点描述其状态。特别是水藻情况（例如：水面清澈无水藻、有少量漂浮水藻、水面被大量绿藻覆盖）、水的颜色、是否有漂浮物或污染物。\n\
+            \    *   **天气情况**: 描述当前的天气，如晴天、阴天、雨天、雪天等。\n    *   **时间信息**: 根据光线、阴影或画面信息判断是白天还是夜晚。\n\
+            \n3.  **关键物体**:\n    *   是否存在车辆、船只、动物或其他值得注意的物体？\n    *   描述它们的类型、数量和状态。\n\
+            \n4.  **总体情况评估**:\n    *   在描述的结尾，可以对现场情况给出一个简短的总结，例如“现场秩序正常”、“未见异常情况”、“存在安全隐患”等。\n\
+            </分析要点>\n\n<描述流程>\n请遵循以下步骤来构建你的输出描述：\n\n1.  **总体概览**: 首先，用一句话总结画面的基本场景和时间。例如：“日间监控画面显示一个公园池塘区域。”\n\
+            2.  **核心要素详述**: 接着，按照重要性顺序详细描述关键要素。通常，优先描述人员活动，然后是环境（特别是水体）状况，最后是其他物体。\n\
+            3.  **量化描述**: 尽可能提供量化的信息，例如“大约有5人”、“水面约50%被水藻覆盖”，而不是模糊的“有一些人”、“水藻很多”。\n\
+            4.  **总结判断**: 最后，根据你的分析给出一个客观的总结。\n5.  **最终检查**: 确保你的描述语言通顺，信息准确，并且完全符合输出要求。\n\
+            </描述流程>\n\n<输出要求>\n-   输出必须是纯文本的中文描述。\n-   输出内容严禁包含任何XML标签，如 `<instruction>`,\
+            \ `<example>` 等。\n-   描述应简洁明了，突出重点，长度适中。\n-   语言风格必须保持客观和专业。\n</输出要求>\n\
+            \n<examples>\n<example>\n输入描述：[一张公园池塘边的监控截图。图片中，池塘水面漂浮着大量绿色水藻，几乎覆盖了近岸的水面。池塘边的小路上，有一位成年男子正在慢跑，远处还有两位老人在长椅上休息。天气晴朗。]\n\
+            输出描述：日间监控画面显示，公园池塘水面被大量绿色水藻覆盖，水体浑浊。池塘边有一名男子正在慢跑，另有两人坐在远处的长椅上。现场无其他异常人员活动。\n\
+            </example>\n<example>\n输入描述：[夜间海边码头的监控画面。海水清澈，没有看到明显的水藻或漂浮物。码头上空无一人，只有几盏路灯亮着。远处海面平静。]\n\
+            输出描述：夜间监控画面显示，码头区域无人活动，环境光照正常。海水水质清澈，未见水藻或异常漂浮物。现场情况正常。\n</example>\n\
+            <example>\n输入描述：[一个城市河道的日间监控画面。河水呈浑浊的黄色，但没有看到大面积的水藻。河岸一侧的步行道上，有三三两两的行人在散步。河道中没有船只。]\n\
+            输出描述：日间监控画面显示，城市河道水体浑浊，呈黄色，未见明显水藻。河岸步行道有多名行人正常通行，未见人群聚集。河面无船只，整体情况平稳。\n\
+            </example>\n</examples>\n```"
+        selected: false
+        title: 智能监控系统分析
+        type: llm
+        variables: []
+        vision:
+          configs:
+            detail: high
+            variable_selector:
+            - '1754963526060'
+            - files
+          enabled: true
+      height: 90
+      id: '1754989701924'
+      position:
+        x: 1246
+        y: 324
+      positionAbsolute:
+        x: 1246
+        y: 324
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        answer: '{{#1754989701924.text#}}'
+        desc: 描述图片
+        selected: true
+        title: 直接回复 2
+        type: answer
+        variables: []
+      height: 133
+      id: '1754990028597'
+      position:
+        x: 1851.097952667113
+        y: 472.57142857142856
+      positionAbsolute:
+        x: 1851.097952667113
+        y: 472.57142857142856
+      selected: true
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        answer: '可用的摄像头名称仅限于以下选项：
+
+          - 大泊口水下
+
+          - 客厅'
+        desc: ''
+        selected: false
+        title: 可用摄像头回复
+        type: answer
+        variables: []
+      height: 118
+      id: '1754990874629'
+      position:
+        x: 638
+        y: 564
+      positionAbsolute:
+        x: 638
+        y: 564
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    viewport:
+      x: -1335.1236081095317
+      y: -240.3354952852303
+      zoom: 0.9236555375410265
