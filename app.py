@@ -8,7 +8,7 @@ app = FastAPI()
 # 在这里配置全部摄像头名称和 RTSP 地址
 # 建议名称使用拼音或英文，避免浏览器 URL 编码困扰
 CAMERAS = {
-    "大泊口水下": "rtsp://39.129.29.230:39888/wtFvX5BhhY52W8rUPhJ7",
+    "大泊口水下": "rtsp://1.1.1.1:39888/wtFvX5BhhY5********",
     "客厅": "rtsp://admin:abc12345@192.168.3.29/Streaming/Channels/101",
     # 在这里可以添加更多摄像头，例如：
     # "houyuan": "rtsp://admin:password@camera-ip-3:554/Streaming/Channels/101",
